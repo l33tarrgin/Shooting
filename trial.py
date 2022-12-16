@@ -154,6 +154,8 @@ class AutomaticRifle(FireWeapon):
         return self.shooting_mode()
 
 
+
+
 ak47 = AutomaticRifle(name='AK-47', mag_size=4, silencer=False, bullet_speed=700)
 ak47.switch_shooting_mode()
 ak47.shoot_gun()
