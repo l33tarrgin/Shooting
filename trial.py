@@ -51,7 +51,7 @@ class FireWeapon(abc.ABC):
                 print(f'{self.shot_sound}\nКоличество оставшихся патронов - {self.current_bullet_count}\n')
             self.reload_gun()
 
-    def shoot_with_burst_mode(self, burst_rounds: int = 0):
+    def shoot_with_burst_mode(self):
         num_bull_shot = self.burst_rounds
         for i in range(self.current_bullet_count, -1, -num_bull_shot):
             if i > 0:
