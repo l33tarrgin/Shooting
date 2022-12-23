@@ -1,5 +1,3 @@
-import abc
-
 # TODO: добавить тесты для всех методов и классов, мб разнести классы в разные файлы, поработать над структурой
 
 
@@ -21,12 +19,7 @@ class General:
 
     def __init__(self, name: str, mag_size: int, silencer: bool,
                  bullet_speed: int):
-        self.name = name
-        self.mag_size = mag_size
-        self.silencer = silencer
-        self.bullet_speed = bullet_speed
-        self.pistol_id = id(self)
-        self.current_bullet_count = self.mag_size
+        pass
 
     def show_props(self):
         props_string = self.props_template.format(
@@ -36,6 +29,10 @@ class General:
             bullet_speed=self.bullet_speed
         )
         return props_string
+
+    def write_data(self):
+        with open('data_show_props', 'w') as f:
+            f.write(self.show_props())
 
     def upgrade_mag_size(self, mag_size):
         self.mag_size = mag_size
@@ -129,7 +126,7 @@ class CycleModeShooting(General):
 
 
 class AutomaticRifle(CycleModeShooting, General):
-    #shooting_mode = None
+    shooting_mode = None
 
     def __init__(self, name: str, mag_size: int, silencer: bool, #вот тут не понятно как правильно нужно сделать
                  bullet_speed: int):
@@ -139,6 +136,7 @@ class AutomaticRifle(CycleModeShooting, General):
         self.bullet_speed = bullet_speed
         self.current_bullet_count = self.mag_size
         self.burst_rounds = 2
+        self.shooting_mode = self.shoot_automatic
 
     def switch_shooting_mode(self):
         available_shooting_modes = {
@@ -153,6 +151,9 @@ class AutomaticRifle(CycleModeShooting, General):
         return self.shooting_mode()
 
 
-ak47 = AutomaticRifle(name='AK-47', mag_size=4, silencer=False, bullet_speed=700)
-ak47.switch_shooting_mode()
-ak47.shoot_gun()
+if __name__ == '__main__':
+
+    ak47 = AutomaticRifle(name='AK-47', mag_size=4, silencer=False, bullet_speed=700)
+    # ak47.switch_shooting_mode()
+    # ak47.shoot_gun()
+    ak47.write_data()
